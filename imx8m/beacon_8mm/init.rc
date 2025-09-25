@@ -22,6 +22,8 @@ on early-init
 
 on early-init
     start early_init_sh
+    # Set the host name which used in console
+    export HOSTNAME evk_8mm
 
     # Due keymaster start very early so set prop here
     # Also gatekeeper share same role for keymaster
