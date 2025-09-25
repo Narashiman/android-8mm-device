@@ -1,0 +1,11 @@
+@@ -39,6 +41,10 @@
+   evk_8mq-userdebug \
+   evk_8mq_drm-user \
+   evk_8mq_drm-userdebug \
++  beacon_8mm-user \
++  beacon_8mm-userdebug \
++  beacon_8mn-user \
++  beacon_8mn-userdebug \
+   evk_8mm-user \
+   evk_8mm-userdebug \
+   evk_8mm_drm-user \

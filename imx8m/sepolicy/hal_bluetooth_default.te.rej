@@ -1,0 +1,11 @@
+@@ -2,6 +2,10 @@
+ allow hal_bluetooth_default bluetooth_data_file:file { write read append getattr };
+ allow hal_bluetooth_default hal_bluetooth_default:unix_stream_socket { ioctl };
+ 
++allow hal_bluetooth_btlinux sysfs:file { write };
++allow hal_bluetooth_btlinux bluetooth_data_file:file { write read append getattr };
++allow hal_bluetooth_btlinux hal_bluetooth_btlinux:unix_stream_socket { ioctl };
++
+ # connect to the UART
+ allow hal_bluetooth_default wcnss_filter:unix_stream_socket {connectto};
+ 

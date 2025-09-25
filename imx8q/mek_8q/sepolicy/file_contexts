@@ -1,0 +1,48 @@
+/dev/block/mmcblk0boot0                      u:object_r:emmc_boot0:s0
+/dev/block/mmcblk1                           u:object_r:sdcard:s0
+
+# cec device
+/dev/cec0              u:object_r:cec_device:s0
+# tv hdmi cec service
+/(vendor|system/vendor)/bin/hw/android\.hardware\.tv\.hdmi.cec-service.imx           u:object_r:hal_tv_hdmi_cec_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.tv\.hdmi.connection-service.imx    u:object_r:hal_tv_hdmi_connection_default_exec:s0
+
+#peripheral
+/dev/ttyLP[0-9]*                u:object_r:tty_device:s0
+/dev/hvc[0-9]*                  u:object_r:tty_device:s0
+/dev/sda[0-8]*                  u:object_r:fuse:s0
+
+#Neural Network HAL service
+/vendor/bin/hw/android\.hardware\.neuralnetworks-shell-service-imx      u:object_r:hal_neuralnetworks_imx_exec:s0
+
+#Thermal HAL service
+/vendor/bin/hw/android\.hardware\.thermal@2\.0-service.imx         u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal-service\.imx             u:object_r:hal_thermal_default_exec:s0
+
+#Hardware Media C2 service
+/vendor/bin/hw/android\.hardware\.media\.c2\.service\.imx    u:object_r:mediacodec_exec:s0
+
+#Bluetootn HAL service
+/vendor/bin/hw/android\.hardware\.bluetooth-service.default.nxp            u:object_r:hal_bluetooth_default_exec:s0
+
+# android.system.suspend@1.0-service
+/sys/devices/platform/sc-powerkey/wakeup                                                                                             u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/sc-powerkey/wakeup/wakeup[0-9]*(/.*)?                                                                          u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/scu/scu:rtc/wakeup                                                                                             u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/scu/scu:rtc/wakeup/wakeup[0-9]*(/.*)?                                                                          u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/scu/scu:rtc/rtc/rtc0/alarmtimer.[0-9].auto/wakeup                                                              u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/scu/scu:rtc/rtc/rtc0/alarmtimer.[0-9].auto/wakeup/wakeup[0-9]*(/.*)?                                           u:object_r:sysfs_wakeup:s0
+/sys/devices/virtual/power_supply/battery/wakeup[0-9]*(/.*)?                                                                         u:object_r:sysfs_wakeup:s0
+/sys/devices/virtual/power_supply/usb/wakeup[0-9]*(/.*)?                                                                             u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5a000000/bus@5a000000:i2c-rpbus-1/i2c-1/1-0050/power_supply/tcpm-source-psy-1-0050/wakeup[0-9]*(/.*)?      u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5a000000/5a800000.i2c/i2c-4/4-0051/power_supply/tcpm-source-psy-4-0051/wakeup[0-9]*(/.*)?                  u:object_r:sysfs_wakeup:s0
+/sys/devices/virtual/wakeup/wakeup[0-9]*(/.*)?                                                                                       u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5b000000/5b040000.ethernet/net/eth0/wakeup[0-9]*(/.*)?                                                     u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5f000000/5f000000.pcie/pci0000:00/0000:00:00.0/0000:01:00.[0-9]*(/.*)?/wakeup                              u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5f000000/5f000000.pcie/pci0000:00/0000:00:00.0/0000:01:00.[0-9]*(/.*)?/wakeup/wakeup[0-9]*(/.*)?           u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5f000000/5f010000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/wakeup                                         u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5f000000/5f010000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/wakeup/wakeup[0-9]*(/.*)?                      u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/system-controller/system-controller:rtc/rtc/rtc[0-9]/alarmtimer.[0-9].auto/wakeup                              u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/system-controller/system-controller:rtc/rtc/rtc[0-9]/alarmtimer.[0-9].auto/wakeup/wakeup[0-9]*(/.*)?           u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/i2c-rpbus-1/i2c-1/1-0050/power_supply/tcpm-source-psy-1-0050/wakeup[0-9]*(/.*)?                                u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/bus@5f000000/5f000000.pcie/wakeup[0-9]*(/.*)?                                                                  u:object_r:sysfs_wakeup:s0
