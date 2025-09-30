@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<audioPolicyConfiguration version="1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+<audioPolicyConfiguration version="7.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <globalConfiguration speaker_drc_enabled="true"/>
 
     <modules>
@@ -22,35 +22,48 @@
             <attachedDevices>
                 <item>Speaker</item>
                 <item>Built-In Mic</item>
-                <item>Wired Headphones</item>
             </attachedDevices>
-            <defaultOutputDevice>Wired Headphones</defaultOutputDevice>
+            <defaultOutputDevice>Speaker</defaultOutputDevice>
             <mixPorts>
                 <mixPort name="primary output" role="source" flags="AUDIO_OUTPUT_FLAG_PRIMARY">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="esai output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                <mixPort name="direct output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="48000,96000,192000,384000,768000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
-                             samplingRates="48000,96000,192000,384000,768000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                             samplingRates="48000 96000 192000 384000 768000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
                 </mixPort>
-                <mixPort name="dsd output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD">
+                <mixPort name="lpa output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
+                <mixPort name="hi-res output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_24_BIT_PACKED"
+                             samplingRates="48000 96000 192000 384000 768000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                             samplingRates="48000 96000 192000 384000 768000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                </mixPort>
+                <mixPort name="dsd output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD">
                     <profile name="" format="AUDIO_FORMAT_DSD"
-                             samplingRates="2822400,5644800,11289600,22579200" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                             samplingRates="2822400 5644800 11289600 22579200" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="bt sco output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                             samplingRates="16000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
 
                 <mixPort name="primary input" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
+                             samplingRates="16000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO"/>
+                </mixPort>
+                <mixPort name="bt sco input" role="sink">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="16000" channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
                 </mixPort>
             </mixPorts>
             <devicePorts>
@@ -69,8 +82,6 @@
 
                 <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source">
                 </devicePort>
-                <devicePort tagName="Spdif-In" type="AUDIO_DEVICE_IN_AUX_DIGITAL" role="source">
-                </devicePort>
                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
                 </devicePort>
             </devicePorts>
@@ -78,9 +89,9 @@
                 <route type="mix" sink="Speaker"
                        sources="primary output"/>
                 <route type="mix" sink="Wired Headphones"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="dsd output,hi-res output,direct output,primary output"/>
                 <route type="mix" sink="Line-Out"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="dsd output,lpa output,primary output"/>
                  <route type="mix" sink="BT SCO Headset"
                         sources="bt sco output"/>
                 <route type="mix" sink="BT SCO CarKit"
@@ -89,13 +100,14 @@
                        sources="bt sco output"/>
 
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Spdif-In,BT SCO Headset Mic"/>
+                       sources="Built-In Mic"/>
+                <route type="mix" sink="bt sco input"
+                       sources="BT SCO Headset Mic"/>
             </routes>
         </module>
 
-        <!-- A2dp Audio HAL -->
-        <xi:include href="a2dp_audio_policy_configuration.xml"/>
-
+        <!-- Bluetooth Audio HAL -->
+        <xi:include href="bluetooth_with_le_audio_policy_configuration_7_0.xml"/>
         <!-- Usb Audio HAL -->
         <xi:include href="usb_audio_policy_configuration.xml"/>
 

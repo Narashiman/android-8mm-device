@@ -79,6 +79,12 @@ endif
 
 BOARD_PREBUILT_DTBOIMAGE := $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/dtbo-imx8mm.img
 
+BOARD_USES_METADATA_PARTITION := true
+BOARD_ROOT_EXTRA_FOLDERS += metadata
+
+ifneq ($(BUILD_ENCRYPTED_BOOT),true)
+  AB_OTA_PARTITIONS += bootloader
+endif
 
 # -------@block_security-------
 ENABLE_CFI=true
@@ -160,6 +166,9 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(IMX_DEVICE_PATH)/bluetooth
 
 BOARD_USE_SENSOR_FUSION := true
 
+# -------@block_kernel_bootimg-------
+BOARD_KERNEL_BASE := 0x40400000
+
 # we don't support sparse image.
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
@@ -188,15 +197,18 @@ endif
 
 # NXP default config
 BOARD_KERNEL_CMDLINE := init=/init androidboot.console=ttymxc1 androidboot.hardware=freescale firmware_class.path=/vendor/firmware loop.max_part=7
+BOARD_BOOTCONFIG += androidboot.console=ttymxc1 androidboot.hardware=nxp
 
 # memory config
 BOARD_KERNEL_CMDLINE += transparent_hugepage=never
+BOARD_KERNEL_CMDLINE += swiotlb=512
 
 # display config
 BOARD_KERNEL_CMDLINE += androidboot.lcd_density=240 androidboot.primary_display=imx-drm
 
 # wifi config
-BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
+BOARD_BOOTCONFIG += androidboot.wificountrycode=CN
+BOARD_KERNEL_CMDLINE += moal.mod_para=wifi_mod_para_sd8987.conf
 
 # low memory device build config
 ifeq ($(LOW_MEMORY),true)
@@ -205,11 +217,15 @@ else
 BOARD_KERNEL_CMDLINE += cma=$(CMASIZE)@0x400M-0xb80M
 endif
 
+
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 ifeq ($(TARGET_USERIMAGES_USE_EXT4),true)
 $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open in same time, please only choose one target file system image")
 endif
 endif
+
+# Disable fw_devlink.strict
+BOARD_KERNEL_CMDLINE += fw_devlink.strict=0
 
 # Add KVM support
 BOARD_BOOTCONFIG += androidboot.hypervisor.vm.supported=true
@@ -245,6 +261,9 @@ else
   endif
 endif
 
+ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
+
+# -------@block_sepolicy-------
 BOARD_SEPOLICY_DIRS := \
        $(CONFIG_REPO_PATH)/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy

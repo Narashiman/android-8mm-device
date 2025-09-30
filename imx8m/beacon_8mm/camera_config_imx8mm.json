@@ -22,7 +22,7 @@
       "PhysicalHeight": "2.7216",
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000",
       "MinFrameDurationBlob5M": "1500000000",
       "OmitFrame": [
@@ -32,22 +32,6 @@
               "omit_num": "2"
           }
       ]
-    },
-    {
-      "camera_type": "front",
-      "camera_name": "uvc",
-      "orientation": "0",
-      "buffer_type": "dma",
-      "ActiveArrayWidth": "1920",
-      "ActiveArrayHeight": "1080",
-      "PixelArrayWidth": "1920",
-      "PixelArrayHeight": "1080",
-      "PhysicalWidth": "2.688",
-      "PhysicalHeight": "1.512",
-      "FocalLength": "3.42",
-      "MaxJpegSize": "4194304",
-      "MinFrameDuration": "33331760",
-      "MaxFrameDuration": "300000000"
     }
   ]
 }
