@@ -35,10 +35,10 @@ PRODUCT_MAKEFILES := \
   $(LOCAL_DIR)/evk_8mp/evk_8mp.mk
 
 COMMON_LUNCH_CHOICES := \
-  beacon_8mm-user \
-  beacon_8mm-userdebug \
-  beacon_8mn-user \
-  beacon_8mn-userdebug \
+  beacon_8mm-nxp-stable-user \
+  beacon_8mm-nxp-stable-userdebug \
+  beacon_8mn-nxp-stable-user \
+  beacon_8mn-nxp-stable-userdebug \
   evk_8mq-nxp_stable-user \
   evk_8mq-nxp_stable-userdebug \
   evk_8mm-nxp_stable-user \
