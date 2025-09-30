@@ -509,7 +509,7 @@ $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk
 ifeq ($(filter TRUE true 1,$(IMX_BUILD_32BIT_ROOTFS) $(IMX_BUILD_32BIT_64BIT_ROOTFS)),)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_64bit_only.mk)
 else
-$(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
+$(call inherit-product-if-exists, vendor/partn8er_gms/products/gms.mk)
 endif
 PRODUCT_SOONG_NAMESPACES += vendor/partner_gms
 
