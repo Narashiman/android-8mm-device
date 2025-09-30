@@ -45,7 +45,7 @@ SOONG_CONFIG_IMXPLUGIN_POWERSAVE = false
 # Product-specific compile-time definitions.
 #
 
-IMX_DEVICE_PATH := device/fsl/imx8m/beacon_8mm
+IMX_DEVICE_PATH := device/nxp/imx8m/beacon_8mm
 
 
 # -------@block_storage-------
